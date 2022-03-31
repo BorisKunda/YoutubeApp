@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/boris/StudioProjects/YoutubeApp/app/src/main/res/drawable/ic_app_icon.xml" value="0.2975" />
         <entry key="..\:/Users/boris/StudioProjects/YoutubeApp/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/boris/StudioProjects/YoutubeApp/app/src/main/res/layout/fragment_player_screen_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/boris/StudioProjects/YoutubeApp/app/src/main/res/layout/fragment_search_screen_layout.xml" value="0.35688405797101447" />
+        <entry key="..\:/Users/boris/StudioProjects/YoutubeApp/app/src/main/res/layout/search_result_item_layout.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

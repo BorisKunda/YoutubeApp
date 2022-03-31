@@ -10,6 +10,7 @@ interface YoutubeApi {
     @GET("search")
     fun getSearchResults(
         @Query("part") part: String,
+        @Query("maxResults") maxResults: String,
         @Query("q") query: String,
         @Query("type") type: String,
         @Query("key") apiKey: String

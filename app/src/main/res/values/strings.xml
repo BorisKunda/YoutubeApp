@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">YoutubeApp</string>
+    <string name="search_box_hint">Search Youtube</string>
 </resources>

@@ -51,8 +51,14 @@ class YoutubeController private constructor(youtubeApiResponseListener: YoutubeA
             .build()
     }
 
-    fun searchVideosByKeyword(keyword: String) {
-        youtubeApi.getSearchResults("snippet", keyword, "video", API_KEY).enqueue(this)
+    fun searchVideosByKeyword(
+        part: String = "snippet",
+        maxResults: String = "10",
+        keyword: String,
+        type: String = "video",
+        apiKey: String = API_KEY
+    ) {
+        youtubeApi.getSearchResults(part, maxResults, keyword, type, apiKey).enqueue(this)
     }
 
     override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {

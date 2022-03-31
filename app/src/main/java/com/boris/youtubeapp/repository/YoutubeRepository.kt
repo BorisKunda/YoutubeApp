@@ -24,7 +24,7 @@ class YoutubeRepository private constructor(application: Application) : YoutubeA
     }
 
     fun searchVideosByKeyword(keyword: String) {
-        YoutubeController.getController(this).searchVideosByKeyword(keyword)
+        YoutubeController.getController(this).searchVideosByKeyword(keyword = keyword)
     }
 
     override fun onSuccess(response: SearchResponse) {

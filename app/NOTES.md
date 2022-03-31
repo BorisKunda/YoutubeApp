@@ -3,3 +3,5 @@
 - check app.compat 
 - okhttp logger
 - improve error flow
+- splash(lottie)
+- cashing
