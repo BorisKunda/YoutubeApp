@@ -30,14 +30,9 @@ class SearchResultsAdapter(private val onRVItemClickListener: OnRVItemClickListe
         val searchResult = searchResultList[position]
         holder.apply {
             searchResult.snippet.let {
-
                 titleTv.text = it.title
                 descTv.text = it.description
-
                 Glide.with(posterIv.context).load(it.thumbnailsContainer.highThumbnail.url).into(posterIv)
-                //placeholder
-                // TODO: take care of error flow
-                //TODO:  progress bar
             }
 
             itemView.setOnClickListener {

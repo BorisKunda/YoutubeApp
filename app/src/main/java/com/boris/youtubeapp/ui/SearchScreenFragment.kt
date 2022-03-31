@@ -2,34 +2,30 @@ package com.boris.youtubeapp.ui
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.boris.youtubeapp.R
 import com.boris.youtubeapp.adapter.SearchResultsAdapter
 import com.boris.youtubeapp.adapter.SearchResultsAdapter.OnRVItemClickListener
 import com.boris.youtubeapp.model.SearchResult
-import com.boris.youtubeapp.repository.YoutubeRepository
 import com.boris.youtubeapp.viewmodel.YoutubeViewModel
 
 
 class SearchScreenFragment : Fragment(), OnRVItemClickListener {
 
-    // TODO:
-    // 1.Add dividers to RV
 
     private val youtubeViewModel: YoutubeViewModel by activityViewModels()
     private lateinit var searchResultsRV: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var searchResultsAdapter: SearchResultsAdapter
-    private val TAG = SearchScreenFragment::class.java.simpleName
+    private val TAG: String = SearchScreenFragment::class.java.simpleName
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,12 +43,10 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
     }
 
     private fun observeLiveData(youtubeViewModel: YoutubeViewModel) {
-
         youtubeViewModel.searchResultsListLD.observe(viewLifecycleOwner) {
             searchResultsAdapter.searchResultList = it
             searchResultsAdapter.notifyDataSetChanged()
         }
-
     }
 
     private fun setRecyclerView(view: View) {
@@ -75,7 +69,6 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // TODO: add functionality
                 Log.d(TAG, "textChanged")
                 return true
             }
@@ -83,9 +76,8 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
         })
     }
 
-
     override fun onRVItemClick(searchResult: SearchResult) {
-
+        youtubeViewModel.clickedSearchResultSLD.value = searchResult
     }
 
 

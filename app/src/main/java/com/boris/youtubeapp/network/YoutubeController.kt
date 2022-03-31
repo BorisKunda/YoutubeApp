@@ -1,8 +1,8 @@
 package com.boris.youtubeapp.network
 
+import com.boris.youtubeapp.model.SearchResponse
 import com.boris.youtubeapp.utils.API_KEY
 import com.boris.youtubeapp.utils.BASE_URL
-import com.boris.youtubeapp.model.SearchResponse
 import com.boris.youtubeapp.utils.NULL_RESPONSE_ERROR_MESSAGE
 import com.boris.youtubeapp.utils.STANDARD_ERROR_MESSAGE
 import okhttp3.OkHttpClient
