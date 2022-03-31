@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,8 +22,12 @@ import com.boris.youtubeapp.viewmodel.YoutubeViewModel
 
 class SearchScreenFragment : Fragment(), OnRVItemClickListener {
 
+    // TODO:
+    // 1.Add dividers to RV
+
     private val youtubeViewModel: YoutubeViewModel by activityViewModels()
     private lateinit var searchResultsRV: RecyclerView
+    private lateinit var searchView: SearchView
     private lateinit var searchResultsAdapter: SearchResultsAdapter
     private val TAG = SearchScreenFragment::class.java.simpleName
 
@@ -35,27 +41,9 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        youtubeViewModel.searchVideosByKeyword("Eminem")
         observeLiveData(youtubeViewModel)
         setRecyclerView(view)
-
-    }
-
-    private fun setRecyclerView(view: View) {
-        searchResultsAdapter = SearchResultsAdapter(this)
-        searchResultsRV = view.findViewById(R.id.search_results_rv)
-        searchResultsRV.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(view.context)
-            addItemDecoration(
-                DividerItemDecoration(
-                    view.context,
-                    DividerItemDecoration.VERTICAL
-                )
-            )
-            adapter = searchResultsAdapter
-        }
+        setSearchView(view)
     }
 
     private fun observeLiveData(youtubeViewModel: YoutubeViewModel) {
@@ -65,6 +53,34 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
             searchResultsAdapter.notifyDataSetChanged()
         }
 
+    }
+
+    private fun setRecyclerView(view: View) {
+        searchResultsAdapter = SearchResultsAdapter(this)
+        searchResultsRV = view.findViewById(R.id.search_results_rv)
+        searchResultsRV.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(view.context)
+            adapter = searchResultsAdapter
+        }
+    }
+
+    private fun setSearchView(view: View) {
+        searchView = view.findViewById(R.id.youtube_sv)
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { youtubeViewModel.searchVideosByKeyword(it) }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // TODO: add functionality
+                Log.d(TAG, "textChanged")
+                return true
+            }
+
+        })
     }
 
 
