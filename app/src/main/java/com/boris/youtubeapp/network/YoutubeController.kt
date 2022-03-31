@@ -1,8 +1,10 @@
 package com.boris.youtubeapp.network
 
-import API_KEY
-import BASE_URL
+import com.boris.youtubeapp.utils.API_KEY
+import com.boris.youtubeapp.utils.BASE_URL
 import com.boris.youtubeapp.model.SearchResponse
+import com.boris.youtubeapp.utils.NULL_RESPONSE_ERROR_MESSAGE
+import com.boris.youtubeapp.utils.STANDARD_ERROR_MESSAGE
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -11,20 +13,23 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class YoutubeController private constructor() : Callback<SearchResponse> {
+class YoutubeController private constructor(youtubeApiResponseListener: YoutubeApiResponseListener) :
+    Callback<SearchResponse> {
 
     private val youtubeApi: YoutubeApi
+    private val responseListener: YoutubeApiResponseListener
 
     init {
         youtubeApi = getRetrofit(getOkHttpClient()).create(YoutubeApi::class.java)
+        responseListener = youtubeApiResponseListener
     }
 
     companion object {
 
         val TAG = YoutubeController::class.java.simpleName
 
-        fun getController(): YoutubeController {
-            val instance: YoutubeController by lazy { YoutubeController() }
+        fun getController(youtubeApiResponseListener: YoutubeApiResponseListener): YoutubeController {
+            val instance: YoutubeController by lazy { YoutubeController(youtubeApiResponseListener) }
             return instance
         }
 
@@ -46,16 +51,31 @@ class YoutubeController private constructor() : Callback<SearchResponse> {
             .build()
     }
 
-    fun getFoo() {
-        youtubeApi.getSearchResults("snippet", "android", "video", API_KEY).enqueue(this)
+    fun searchVideosByKeyword(keyword: String) {
+        youtubeApi.getSearchResults("snippet", keyword, "video", API_KEY).enqueue(this)
     }
 
     override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
+
+        val searchResponse: SearchResponse? = response.body()
+
+        if (searchResponse != null) {
+            responseListener.onSuccess(searchResponse)
+        } else {
+            responseListener.onError(NULL_RESPONSE_ERROR_MESSAGE)
+        }
 
     }
 
     override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
 
+        val message: String? = t.message
+
+        if (message != null) {
+            responseListener.onError(message)
+        } else {
+            responseListener.onError(STANDARD_ERROR_MESSAGE)
+        }
     }
 
 }
