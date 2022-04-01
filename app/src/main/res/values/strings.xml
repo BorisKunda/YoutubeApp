@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">YoutubeApp</string>
     <string name="search_box_hint">Search Youtube</string>
+    <string name="mock_text_short">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</string>
+    <string name="mock_text_medium">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</string>
+    <string name="mock_text_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin turpis vehicula est mollis auctor. Nullam sed felis sed orci feugiat scelerisque. Nulla ac ante a ex lobortis rhoncus.</string>
 </resources>

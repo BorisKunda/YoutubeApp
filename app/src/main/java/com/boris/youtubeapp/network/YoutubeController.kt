@@ -3,7 +3,6 @@ package com.boris.youtubeapp.network
 import com.boris.youtubeapp.model.SearchResponse
 import com.boris.youtubeapp.utils.API_KEY
 import com.boris.youtubeapp.utils.BASE_URL
-import com.boris.youtubeapp.utils.NULL_RESPONSE_ERROR_MESSAGE
 import com.boris.youtubeapp.utils.STANDARD_ERROR_MESSAGE
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -62,25 +61,16 @@ class YoutubeController private constructor(youtubeApiResponseListener: YoutubeA
 
     override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
 
-        val searchResponse: SearchResponse? = response.body()
+        val responseBody: SearchResponse? = response.body()
 
-        if (searchResponse != null) {
-            responseListener.onSuccess(searchResponse)
-        } else {
-            responseListener.onError(NULL_RESPONSE_ERROR_MESSAGE)
-        }
+        if (response.isSuccessful && responseBody != null) {
+            responseListener.onSuccess(responseBody)
+        } else responseListener.onError("$STANDARD_ERROR_MESSAGE - code: ${response.code()}")
 
     }
 
     override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
-
-        val message: String? = t.message
-
-        if (message != null) {
-            responseListener.onError(message)
-        } else {
-            responseListener.onError(STANDARD_ERROR_MESSAGE)
-        }
+        responseListener.onError(t.message ?: STANDARD_ERROR_MESSAGE)
     }
 
 }

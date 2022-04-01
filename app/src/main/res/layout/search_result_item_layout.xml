@@ -1,36 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:weightSum="3"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="@dimen/medium_padding">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:padding="5dp"
-        android:layout_weight="1"
         android:id="@+id/thumbnail_iv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:layout_width="@dimen/thumbnail_width"
+        android:layout_height="@dimen/thumbnail_height"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_video_placeholder" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:padding="5dp"
-        android:layout_weight="2"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="@dimen/zero_number_match_parent_in_cl"
+        android:layout_height="@dimen/thumbnail_height"
+        android:layout_marginStart="@dimen/medium_padding"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/small_padding"
+        app:layout_constraintBottom_toBottomOf="@+id/thumbnail_iv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/thumbnail_iv"
+        app:layout_constraintTop_toTopOf="@+id/thumbnail_iv"
+        tools:ignore="RtlSymmetry">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:textStyle="bold"
             android:id="@+id/title_tv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@string/mock_text_short"
+            android:textSize="@dimen/search_item_tv_size"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_marginTop="5dp"
             android:id="@+id/desc_tv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_padding"
+            android:text="@string/mock_text_long"
+            android:textSize="@dimen/search_item_tv_size" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

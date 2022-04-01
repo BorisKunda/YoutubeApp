@@ -2,13 +2,15 @@ package com.boris.youtubeapp.repository
 
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.boris.youtubeapp.model.SearchResponse
 import com.boris.youtubeapp.model.SearchResult
 import com.boris.youtubeapp.network.YoutubeApiResponseListener
 import com.boris.youtubeapp.network.YoutubeController
 
-class YoutubeRepository private constructor(application: Application) : YoutubeApiResponseListener {
+class YoutubeRepository private constructor(private val application: Application) :
+    YoutubeApiResponseListener {
 
     val searchResultsListMLD: MutableLiveData<List<SearchResult>> = MutableLiveData()
 
@@ -33,6 +35,7 @@ class YoutubeRepository private constructor(application: Application) : YoutubeA
 
     override fun onError(message: String) {
         Log.e(TAG, message)
+        Toast.makeText(application, message, Toast.LENGTH_SHORT).show()
     }
 
 }
