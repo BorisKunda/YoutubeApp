@@ -14,13 +14,13 @@ import com.boris.youtubeapp.R
 import com.boris.youtubeapp.adapter.SearchResultsAdapter
 import com.boris.youtubeapp.adapter.SearchResultsAdapter.OnRVItemClickListener
 import com.boris.youtubeapp.model.SearchResult
-import com.boris.youtubeapp.viewmodel.YoutubeViewModel
+import com.boris.youtubeapp.viewmodel.SearchScreenViewModel
 
 
 class SearchScreenFragment : Fragment(), OnRVItemClickListener {
 
 
-    private val youtubeViewModel: YoutubeViewModel by activityViewModels()
+    private val searchScreenViewModel: SearchScreenViewModel by activityViewModels()
     private lateinit var searchResultsRV: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var searchResultsAdapter: SearchResultsAdapter
@@ -37,13 +37,13 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeLiveData(youtubeViewModel)
+        observeLiveData(searchScreenViewModel)
         setRecyclerView(view)
         setSearchView(view)
     }
 
-    private fun observeLiveData(youtubeViewModel: YoutubeViewModel) {
-        youtubeViewModel.searchResultsListLD.observe(viewLifecycleOwner) {
+    private fun observeLiveData(searchScreenViewModel: SearchScreenViewModel) {
+        searchScreenViewModel.searchResultsListLD.observe(viewLifecycleOwner) {
             searchResultsAdapter.searchResultList = it
             searchResultsAdapter.notifyDataSetChanged()
         }
@@ -64,21 +64,19 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { youtubeViewModel.searchVideosByKeyword(it) }
+                query?.let { searchScreenViewModel.searchVideosByKeyword(it) }
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                Log.d(TAG, "textChanged")
                 return true
             }
 
         })
     }
 
-    override fun onRVItemClick(searchResult: SearchResult) {
-        youtubeViewModel.clickedSearchResultSLD.value = searchResult
+    override fun onRVItemClick(videoId: String) {
+        searchScreenViewModel.clickedSearchResultVideoIdSLD.value = videoId
     }
-
 
 }

@@ -32,11 +32,11 @@ class SearchResultsAdapter(private val onRVItemClickListener: OnRVItemClickListe
             searchResult.snippet.let {
                 titleTv.text = it.title
                 descTv.text = it.description
-                Glide.with(posterIv.context).load(it.thumbnailsContainer.highThumbnail.url).into(posterIv)
+                Glide.with(posterIv.context).load(it.thumbnailsContainer.highThumbnail.url)
+                    .into(posterIv)
             }
-
             itemView.setOnClickListener {
-                onRVItemClickListener.onRVItemClick(searchResult)
+                onRVItemClickListener.onRVItemClick(searchResult.id.videoId)
             }
         }
     }
@@ -50,7 +50,7 @@ class SearchResultsAdapter(private val onRVItemClickListener: OnRVItemClickListe
     }
 
     interface OnRVItemClickListener {
-        fun onRVItemClick(searchResult: SearchResult)
+        fun onRVItemClick(videoId: String)
     }
 
 }

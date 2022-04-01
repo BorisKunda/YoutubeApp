@@ -18,6 +18,7 @@ class YoutubeController private constructor(youtubeApiResponseListener: YoutubeA
 
     private val youtubeApi: YoutubeApi
     private val responseListener: YoutubeApiResponseListener
+    private val TAG = YoutubeController::class.java.simpleName
 
     init {
         youtubeApi = getRetrofit(getOkHttpClient()).create(YoutubeApi::class.java)
@@ -25,8 +26,6 @@ class YoutubeController private constructor(youtubeApiResponseListener: YoutubeA
     }
 
     companion object {
-
-        val TAG = YoutubeController::class.java.simpleName
 
         fun getController(youtubeApiResponseListener: YoutubeApiResponseListener): YoutubeController {
             val instance: YoutubeController by lazy { YoutubeController(youtubeApiResponseListener) }
@@ -55,7 +54,7 @@ class YoutubeController private constructor(youtubeApiResponseListener: YoutubeA
         part: String = "snippet",
         maxResults: String = "10",
         keyword: String,
-        type: String = "video",
+        type: String = "item",
         apiKey: String = API_KEY
     ) {
         youtubeApi.getSearchResults(part, maxResults, keyword, type, apiKey).enqueue(this)
