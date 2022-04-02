@@ -1,19 +1,20 @@
 package com.boris.youtubeapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.boris.youtubeapp.R
 import com.boris.youtubeapp.adapter.SearchResultsAdapter
 import com.boris.youtubeapp.adapter.SearchResultsAdapter.OnRVItemClickListener
-import com.boris.youtubeapp.model.SearchResult
 import com.boris.youtubeapp.viewmodel.SearchScreenViewModel
 
 
@@ -24,6 +25,7 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
     private lateinit var searchResultsRV: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var searchResultsAdapter: SearchResultsAdapter
+    private lateinit var searchLoaderLAV: LottieAnimationView
     private val TAG: String = SearchScreenFragment::class.java.simpleName
 
 
@@ -40,10 +42,16 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
         observeLiveData(searchScreenViewModel)
         setRecyclerView(view)
         setSearchView(view)
+        setLottieAnimationView(view)
     }
 
     private fun observeLiveData(searchScreenViewModel: SearchScreenViewModel) {
         searchScreenViewModel.searchResultsListLD.observe(viewLifecycleOwner) {
+            searchLoaderLAV.apply {
+                pauseAnimation()
+                visibility = GONE
+            }
+            searchResultsRV.visibility = VISIBLE
             searchResultsAdapter.searchResultList = it
             searchResultsAdapter.notifyDataSetChanged()
         }
@@ -64,7 +72,14 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { searchScreenViewModel.searchVideosByKeyword(it) }
+                query?.let {
+                    searchScreenViewModel.searchVideosByKeyword(it)
+                    searchResultsRV.visibility = GONE
+                    searchLoaderLAV.apply {
+                        visibility = VISIBLE
+                        playAnimation()
+                    }
+                }
                 return true
             }
 
@@ -73,6 +88,10 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
             }
 
         })
+    }
+
+    private fun setLottieAnimationView(view: View) {
+        searchLoaderLAV = view.findViewById(R.id.loader_lav)
     }
 
     override fun onRVItemClick(videoId: String) {

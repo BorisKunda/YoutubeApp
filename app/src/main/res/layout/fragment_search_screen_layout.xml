@@ -16,6 +16,19 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_results_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loader_lav"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:visibility="gone"
+        app:lottie_autoPlay="false"
+        app:lottie_fileName="loading_search_lottie_animation.json"
+        app:lottie_loop="true" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

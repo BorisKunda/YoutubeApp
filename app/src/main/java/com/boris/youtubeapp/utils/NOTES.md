@@ -7,7 +7,7 @@
   *optional*
 - if one of url is unavailable(default) use other (medium/high)
 - place holder to images
-- cards
+- notify data set change
 
 # Search screen
 
@@ -48,3 +48,10 @@
 credit to:
 <a href="https://www.flaticon.com/free-icons/youtube" title="youtube icons">Youtube icons created by
 Roundicons - Flaticon</a>
+
+----
+crashes
+----
+
+1. somehow while input "hh" there is one item that is not type of video
+
