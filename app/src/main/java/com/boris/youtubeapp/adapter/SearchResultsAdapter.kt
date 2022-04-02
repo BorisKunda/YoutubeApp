@@ -41,7 +41,8 @@ class SearchResultsAdapter(private val onRVItemClickListener: OnRVItemClickListe
             searchResult.snippet.let {
                 titleTv.text = it.title
                 descTv.text = it.description
-                Glide.with(posterIv.context).load(it.thumbnailsContainer.mediumThumbnail.url)
+                Glide.with(posterIv.context)
+                    .load(it.thumbnailsContainer.mediumThumbnail.url)
                     .listener(object : RequestListener<Drawable> {
                         override fun onLoadFailed(
                             p0: GlideException?,

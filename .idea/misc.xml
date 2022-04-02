@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/boris/StudioProjects/YoutubeApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2975" />
         <entry key="..\:/Users/boris/StudioProjects/YoutubeApp/app/src/main/res/drawable/ic_app_icon.xml" value="0.2975" />
+        <entry key="..\:/Users/boris/StudioProjects/YoutubeApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2975" />
         <entry key="..\:/Users/boris/StudioProjects/YoutubeApp/app/src/main/res/drawable/ic_place_holder_standard.xml" value="0.196" />
         <entry key="..\:/Users/boris/StudioProjects/YoutubeApp/app/src/main/res/drawable/ic_video_placeholder.xml" value="0.2975" />
         <entry key="..\:/Users/boris/StudioProjects/YoutubeApp/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />

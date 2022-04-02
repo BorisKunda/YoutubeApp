@@ -2,34 +2,32 @@
 
 # RV
 
-- if one of url is unavailble(default) use other (medium/high)
 - add dividers to between items
-- description text not properly displayed
-- loading results progress bar
+- loading results progress bar - lottie  
+  *optional*
+- if one of url is unavailable(default) use other (medium/high)
 - place holder to images
-- view has no image
+- cards
 
 # Search screen
 
-- empty query
-- search button
-- dynamic search
-- lock orientation change
 - Search button – preferably replace soft keyboard action button to show search button
-- If there is no image the text should still be aligned to the image.
+- basic input check
+  *optional*
+- card view when there is no image edge case
 
 # Player
 
-- icon is barely visible on white video background
-- check about player recreation
+- check about player recreation //optional
 - lock screen
 
 # TODO
 
-- remove dark mode
+- test on different devices and api versions
 - icon
 - remove unnecessary methods in player class
 - remove KotlinTest.class
+- clean code
 
 # Optional - Grid-List toggle
 
@@ -41,9 +39,12 @@
 
 # Extra
 
-- clean code
-- take care of dark-mode
-- okhttp logger
 - improve error flow
 - splash(lottie)
 - cashing results
+
+# app icon
+
+credit to:
+<a href="https://www.flaticon.com/free-icons/youtube" title="youtube icons">Youtube icons created by
+Roundicons - Flaticon</a>
