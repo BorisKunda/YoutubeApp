@@ -64,6 +64,11 @@ class YoutubeController private constructor(youtubeApiResponseListener: YoutubeA
         val responseBody: SearchResponse? = response.body()
 
         if (response.isSuccessful && responseBody != null) {
+            if (responseBody.items.isNotEmpty()) {
+                responseListener.onSuccess(responseBody)
+            } else {
+                responseListener.onError("$STANDARD_ERROR_MESSAGE - response is empty")
+            }
             responseListener.onSuccess(responseBody)
         } else responseListener.onError("$STANDARD_ERROR_MESSAGE - code: ${response.code()}")
 

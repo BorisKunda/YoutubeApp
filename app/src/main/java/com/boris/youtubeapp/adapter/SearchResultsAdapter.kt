@@ -67,7 +67,6 @@ class SearchResultsAdapter(private val onRVItemClickListener: OnRVItemClickListe
                             return false
                         }
                     })
-                    //   .centerCrop()
                     .into(posterIv)
             }
             itemView.setOnClickListener {

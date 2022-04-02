@@ -8,15 +8,17 @@ import com.boris.youtubeapp.model.SearchResponse
 import com.boris.youtubeapp.model.SearchResult
 import com.boris.youtubeapp.network.YoutubeApiResponseListener
 import com.boris.youtubeapp.network.YoutubeController
+import com.boris.youtubeapp.utils.SingleLiveEvent
 
 class YoutubeRepository private constructor(private val application: Application) :
     YoutubeApiResponseListener {
 
     val searchResultsListMLD: MutableLiveData<List<SearchResult>> = MutableLiveData()
+    val searchRequestFailedSld: SingleLiveEvent<Void> = SingleLiveEvent()
+    val TAG = YoutubeRepository::class.java.simpleName
 
     companion object {
 
-        val TAG = YoutubeRepository::class.java.simpleName
 
         fun getRepository(application: Application): YoutubeRepository {
             val instance: YoutubeRepository by lazy { YoutubeRepository(application) }
@@ -36,6 +38,7 @@ class YoutubeRepository private constructor(private val application: Application
     override fun onError(message: String) {
         Log.e(TAG, message)
         Toast.makeText(application, message, Toast.LENGTH_SHORT).show()
+        searchRequestFailedSld.call()
     }
 
 }

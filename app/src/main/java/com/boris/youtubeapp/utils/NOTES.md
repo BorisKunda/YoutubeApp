@@ -1,10 +1,27 @@
+# block search until there is response
+
+# onDestroy or on destroy view cnacek timer
+
+# clear x search
+
+# RV counter
+
+# Player start/stop
+
 # Coroutines
+
+# Hilt
+
+# Grid
+
+# Search looks good
 
 # RV
 
-- add dividers to between items
-- loading results progress bar - lottie  
-  *optional*
+- counter for lottie
+
+*optional*
+
 - if one of url is unavailable(default) use other (medium/high)
 - place holder to images
 - notify data set change
@@ -14,17 +31,14 @@
 - Search button – preferably replace soft keyboard action button to show search button
 - basic input check
   *optional*
-- card view when there is no image edge case
 
 # Player
 
-- check about player recreation //optional
-- lock screen
+- check about player recreation -stop/resume
 
 # TODO
 
 - test on different devices and api versions
-- icon
 - remove unnecessary methods in player class
 - remove KotlinTest.class
 - clean code
@@ -39,9 +53,7 @@
 
 # Extra
 
-- improve error flow
 - splash(lottie)
-- cashing results
 
 # app icon
 
