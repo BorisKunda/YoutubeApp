@@ -48,10 +48,10 @@ class YoutubeController private constructor(youtubeApiResponseListener: YoutubeA
     }
 
     fun searchVideosByKeyword(
-        part: String = "snippet",
-        maxResults: String = "10",
+        part: String = SEARCH_REQUEST_DEFAULT_ARGUMENT_PART,
+        maxResults: String = SEARCH_REQUEST_DEFAULT_ARGUMENT_MAX_RESULT,
         keyword: String,
-        type: String = "item",
+        type: String = SEARCH_REQUEST_DEFAULT_ARGUMENT_TYPE,
         apiKey: String = API_KEY
     ) {
         youtubeApi.getSearchResults(part, maxResults, keyword, type, apiKey).enqueue(this)
@@ -65,14 +65,14 @@ class YoutubeController private constructor(youtubeApiResponseListener: YoutubeA
             if (responseBody.items.isNotEmpty()) {
                 responseListener.onSuccess(responseBody)
             } else {
-                responseListener.onError("$STANDARD_ERROR_MESSAGE - response is empty")
+                responseListener.onError("$STANDARD_ERROR_MESSAGE - $ERROR_REASON_EMPTY_RESPONSE")
             }
             responseListener.onSuccess(responseBody)
         } else {
             if (response.code() == ERROR_403_FORBIDDEN) {
                 responseListener.onError("$STANDARD_ERROR_MESSAGE - $ERROR_403_YOUTUBE_API")
             } else {
-                responseListener.onError("$STANDARD_ERROR_MESSAGE - code: ${response.code()}")
+                responseListener.onError("$STANDARD_ERROR_MESSAGE - $ERROR_CODE: ${response.code()}")
             }
         }
 

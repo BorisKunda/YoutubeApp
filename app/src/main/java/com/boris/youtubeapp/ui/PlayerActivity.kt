@@ -10,9 +10,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerView
 
-class PlayerActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener,
-    YouTubePlayer.OnFullscreenListener, YouTubePlayer.PlayerStateChangeListener,
-    YouTubePlayer.PlaybackEventListener {
+class PlayerActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener {
 
 
     private var videoId: String? = null
@@ -49,44 +47,4 @@ class PlayerActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListene
         }
     }
 
-
-    override fun onFullscreen(p0: Boolean) {
-
-    }
-
-
-    override fun onLoading() {
-
-    }
-
-    override fun onLoaded(p0: String?) {
-    }
-
-    override fun onAdStarted() {
-    }
-
-    override fun onVideoStarted() {
-    }
-
-    override fun onVideoEnded() {
-    }
-
-    override fun onError(p0: YouTubePlayer.ErrorReason?) {
-    }
-
-    override fun onPlaying() {
-    }
-
-
-    override fun onPaused() {
-    }
-
-    override fun onStopped() {
-    }
-
-    override fun onBuffering(p0: Boolean) {
-    }
-
-    override fun onSeekTo(p0: Int) {
-    }
 }

@@ -120,6 +120,10 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
                 searchResultsRV.visibility = VISIBLE
             }
             requestTimeoutSld.observe(viewLifecycleOwner) {
+                searchLoaderLAV.apply {
+                    pauseAnimation()
+                    visibility = GONE
+                }
                 Toast.makeText(context, TIMEOUT_ERROR_MESSAGE, Toast.LENGTH_SHORT).show()
                 Log.e(TAG, TIMEOUT_ERROR_MESSAGE)
             }
