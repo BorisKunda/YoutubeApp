@@ -1,9 +1,7 @@
 package com.boris.youtubeapp.network
 
 import com.boris.youtubeapp.model.SearchResponse
-import com.boris.youtubeapp.utils.API_KEY
-import com.boris.youtubeapp.utils.BASE_URL
-import com.boris.youtubeapp.utils.STANDARD_ERROR_MESSAGE
+import com.boris.youtubeapp.utils.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -70,7 +68,13 @@ class YoutubeController private constructor(youtubeApiResponseListener: YoutubeA
                 responseListener.onError("$STANDARD_ERROR_MESSAGE - response is empty")
             }
             responseListener.onSuccess(responseBody)
-        } else responseListener.onError("$STANDARD_ERROR_MESSAGE - code: ${response.code()}")
+        } else {
+            if (response.code() == ERROR_403_FORBIDDEN) {
+                responseListener.onError("$STANDARD_ERROR_MESSAGE - $ERROR_403_YOUTUBE_API")
+            } else {
+                responseListener.onError("$STANDARD_ERROR_MESSAGE - code: ${response.code()}")
+            }
+        }
 
     }
 

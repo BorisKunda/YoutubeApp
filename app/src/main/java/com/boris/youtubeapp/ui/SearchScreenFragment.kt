@@ -1,5 +1,6 @@
 package com.boris.youtubeapp.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -138,10 +140,12 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
 
     private fun setSearchView(view: View) {
         searchView = view.findViewById(R.id.youtube_sv)
+        searchView.onActionViewExpanded()
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
+                    hideSoftKeyBoard()
                     if (!isTimerRunning) {
                         searchRequestTimeoutCountDownTimer.start()
                         isTimerRunning = true
@@ -187,6 +191,12 @@ class SearchScreenFragment : Fragment(), OnRVItemClickListener {
 
     override fun onRVItemClick(videoId: String) {
         searchScreenViewModel.clickedSearchResultVideoIdSLD.value = videoId
+    }
+
+    fun hideSoftKeyBoard() {
+        val imm: InputMethodManager =
+            context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
     enum class SearchStatusEnum {
